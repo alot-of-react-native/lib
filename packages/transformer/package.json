@@ -23,7 +23,6 @@
   "author": "Aaron Friel <mayreply@aaronfriel.com>",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@alot/jest-preset": "^0.0.1",
     "app-root-path": "^2.0.1",
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -42,8 +41,5 @@
     "tslint": "^5.7.0",
     "tslint-microsoft-contrib": "^5.0.1",
     "typescript": "^2.6.0-rc"
-  },
-  "jest": {
-    "preset": "@alot/jest-preset"
   }
 }

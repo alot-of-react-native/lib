@@ -1,0 +1,59 @@
+stages:
+  - build
+  - test
+  - review
+  - staging
+  - canary
+  - production
+  - cleanup
+
+build:
+  stage: build
+  image: node:alpine
+  script:
+    - apk add --no-cache git
+    - npm install -g yarn lerna
+    - yarn run bootstrap --hoist
+    - yarn
+    - yarn run test
+  only:
+    - branches
+
+codequality:
+  allow_failure: true
+  image: docker:git
+  services:
+  - name: registry.gitlab.frielforreal.com/global/docker:dind
+    alias: docker
+  script:
+    - setup_docker
+    - codeclimate
+  artifacts:
+    paths: [codeclimate.json]
+
+# ---------------------------------------------------------------------------
+
+.auto_devops: &auto_devops |
+  # Auto DevOps variables and functions
+  [[ "$TRACE" ]] && set -x
+
+  function codeclimate() {
+    cc_opts="--env CODECLIMATE_CODE="$PWD" \
+             --volume "$PWD":/code \
+             --volume /var/run/docker.sock:/var/run/docker.sock \
+             --volume /tmp/cc:/tmp/cc"
+
+    docker run ${cc_opts} codeclimate/codeclimate init
+    docker run ${cc_opts} codeclimate/codeclimate analyze -f json > codeclimate.json
+  }
+
+  function setup_docker() {
+    if ! docker info &>/dev/null; then
+      if [ -z "$DOCKER_HOST" -a "$KUBERNETES_PORT" ]; then
+        export DOCKER_HOST='tcp://localhost:2375'
+      fi
+    fi
+  }
+
+before_script:
+  - *auto_devops
