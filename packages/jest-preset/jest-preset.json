@@ -1,0 +1,30 @@
+{
+  "haste": {
+    "defaultPlatform": "ios",
+    "platforms": ["android", "ios", "native"],
+    "providesModuleNodeModules": ["react-native"]
+  },
+  "moduleNameMapper": {
+    "^[./a-zA-Z0-9$_-]+\\.(bmp|gif|jpg|jpeg|png|psd|svg|webp|ttf|otf)$":
+      "RelativeImageStub",
+    "^React$": "<rootDir>/node_modules/react"
+  },
+  "modulePathIgnorePatterns": [
+    "<rootDir>/node_modules/react-native/Libraries/react-native/"
+  ],
+  "transform": {
+    "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@alot/jest-preset/preprocessor"
+  },
+  "transformIgnorePatterns": [
+    "<rootDir>/node_modules/(?!(jest-)?react-native|react-clone-referenced-element)"
+  ],
+  "setupFiles": ["<rootDir>/node_modules/react-native/jest/setup.js"],
+  "testEnvironment": "node",
+  "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json"],
+  "testMatch": [
+    "**/__tests__/**/*.js?(x)",
+    "**/?(*.)(spec|test).js?(x)",
+    "**/__tests__/**/*.ts?(x)",
+    "**/?(*.)(spec|test).ts?(x)"
+  ]
+}

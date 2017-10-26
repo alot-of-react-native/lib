@@ -1,0 +1,44 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/transformer",
+    "packages/jest-preset"
+  ],
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "@alot/jest-preset",
+    "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json", "node"],
+    "testMatch": [
+      "**/__tests__/**/*.js?(x)",
+      "**/?(*.)(spec|test).js?(x)",
+      "**/__tests__/**/*.ts?(x)",
+      "**/?(*.)(spec|test).ts?(x)"
+    ],
+    "transform": {
+        "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+        "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@alot/jest-preset/preprocessor"
+    },
+
+    "setupFiles": ["<rootDir>/node_modules/react-native/jest/setup.js"],
+
+    "moduleNameMapper": {
+      "^[./a-zA-Z0-9$_-]+\\.(bmp|gif|jpg|jpeg|png|psd|svg|webp|ttf|otf)$":
+        "RelativeImageStub",
+      "^React$": "<rootDir>/node_modules/react"
+    },
+    "testPathIgnorePatterns": [
+      "Libraries/Renderer",
+      "/node_modules/",
+      "/website/",
+      "local-cli/templates/"
+    ],
+    "haste": {
+      "defaultPlatform": "ios",
+      "providesModuleNodeModules": ["react-native"],
+      "platforms": ["ios", "android"]
+    },
+    "testEnvironment": "node"
+  }
+}
