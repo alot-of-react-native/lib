@@ -1,6 +1,6 @@
 {
   "name": "@alot/jest-preset",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A TypeScript and Babel Jest preset for React Native.",
   "files": [
     "jest-preset.json",
