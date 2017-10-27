@@ -3,7 +3,10 @@
   "version": "1.1.2",
   "description": "A TypeScript and Babel Jest preset for React Native.",
   "files": [
-    "jest-preset.json"
+    "jest-preset.json",
+    "assetFileTransformer",
+    "preprocessor",
+    "setup"
   ],
   "repository": "https://github.com/alot-of-react-native/jest-preset",
   "author": "Aaron Friel",
