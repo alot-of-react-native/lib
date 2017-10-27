@@ -1,6 +1,6 @@
 {
   "name": "@alot/transformer",
-  "version": "1.1.2",
+  "version": "1.1.2-2",
   "description": "A TypeScript and Babel transformer for React Native.",
   "repository": {
     "type": "git",
@@ -22,6 +22,9 @@
   },
   "author": "Aaron Friel <mayreply@aaronfriel.com>",
   "license": "BSD-3-Clause",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "app-root-path": "^2.0.1",
     "babel-core": "^6.26.0",
