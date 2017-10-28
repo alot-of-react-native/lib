@@ -13,7 +13,8 @@
     "<rootDir>/node_modules/react-native/Libraries/react-native/"
   ],
   "transform": {
-    "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@alot/jest-preset/preprocessor"
+    "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@alot/jest-preset/preprocessor",
+    "^.+\\.(js|jsx)$": "<rootDir>/node_modules/@alot/jest-preset/preprocessor"
   },
   "transformIgnorePatterns": [
     "<rootDir>/node_modules/(?!(jest-)?react-native|react-clone-referenced-element)"

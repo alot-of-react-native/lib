@@ -25,8 +25,8 @@
       "**/?(*.)(spec|test).ts?(x)"
     ],
     "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@alot/jest-preset/preprocessor"
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@alot/jest-preset/preprocessor",
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/@alot/jest-preset/preprocessor"
     },
     "setupFiles": [
       "<rootDir>/node_modules/react-native/jest/setup.js"

@@ -2,7 +2,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import * as appRootPath from 'app-root-path';
-import { readdir } from 'fs';
 appRootPath.setPath(path.join(__dirname, '..'));
 
 const FIXTURES = path.join(__dirname, '__fixtures__');
