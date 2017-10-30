@@ -1,7 +1,7 @@
 /**
  *
  */
-import { Node } from 'babel-core';
+import { Node, TransformOptions } from 'babel-core';
 
 // TODO: Better typings?
 // Called MappingsMap here:
@@ -23,7 +23,7 @@ export interface TransformedCode {
 }
 
 export interface TransformResult {
-  ast: Node;
+  ast?: Node;
   code: string;
   map: MappingsMap;
   // used in metro-bundler/src/transformer.js
@@ -58,7 +58,7 @@ export interface Data {
 }
 
 export type TransformFn<ExtraOptions = {}> = (Params: Params<ExtraOptions>) => TransformResult;
-export type CacheKeyFn = () => string;
+export type CacheKeyFn = (fileData?: string, filename?: string, configString?: string) => string;
 
 export interface Transformer<ExtraOptions = {}> {
   transform: TransformFn<ExtraOptions>;

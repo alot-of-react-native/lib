@@ -29,7 +29,7 @@ import fs = require('fs');
 import json5 = require('json5');
 import path = require('path');
 
-import { Options, Params, Transformer } from './Types';
+import { Options, Params, Transformer, TransformResult } from './Types';
 
 // @ts-ignore
 import {compactMapping} from 'metro-bundler/src/Bundler/source-map';
@@ -109,7 +109,7 @@ const getBabelRC = (() => {
  * Given a filename and options, build a Babel
  * config object with the appropriate plugins.
  */
-function buildBabelConfig(filename: string, options: Options) {
+function buildBabelConfig(filename: string, options: Options): TransformOptions {
   const babelRC = getBabelRC(options.projectRoot);
 
   const extraConfig = {
@@ -121,7 +121,7 @@ function buildBabelConfig(filename: string, options: Options) {
     filename,
   };
 
-  let config = {...babelRC, ...extraConfig};
+  let config: TransformOptions = {...babelRC, ...extraConfig};
 
   // Add extra plugins
   const extraPlugins = [externalHelpersPlugin];
@@ -143,14 +143,23 @@ function buildBabelConfig(filename: string, options: Options) {
   return {...babelRC, ...config};
 }
 
-export function transform({filename, options, src}: Params<{retainLines?: boolean}>) {
+export interface ExtraOptions {
+  retainLines?: boolean;
+  babelConfig?: TransformOptions;
+}
+
+export function transform({filename, options, src}: Params<ExtraOptions>): TransformResult {
   options = options || {platform: '', projectRoot: '', inlineRequires: false};
 
   const OLD_BABEL_ENV = process.env.BABEL_ENV;
   process.env.BABEL_ENV = options.dev ? 'development' : 'production';
 
   try {
-    const babelConfig = buildBabelConfig(filename, options);
+    const babelConfig: TransformOptions = {
+      ...buildBabelConfig(filename, options),
+      ...options.babelConfig,
+    };
+    // @ts-ignore
     const {ast, ignored} = babel.transform(src, babelConfig);
 
     if (ignored) {

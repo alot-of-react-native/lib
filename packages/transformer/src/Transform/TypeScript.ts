@@ -144,7 +144,6 @@ const compilerOptions = {
 };
 
 export let transform: TransformFn = ({src, filename, options}) => {
-  if (filename.endsWith('.ts') || filename.endsWith('.tsx')) {
     const tsCompileResult = ts.transpileModule(src, {
       compilerOptions,
       fileName: filename,
@@ -174,31 +173,12 @@ export let transform: TransformFn = ({src, filename, options}) => {
       }
     }
 
-    const babelCompileResult = upstream.transform({
+    return {
+      code: tsCompileResult.outputText,
       filename,
-      options,
-      src: tsCompileResult.outputText,
-    });
-
-    const composedMap = Array.isArray(babelCompileResult.map)
-      ? composeRawSourceMap(
-          tsCompileResult.sourceMapText,
-          babelCompileResult.map,
-        )
-      : composeSourceMaps(
-          tsCompileResult.sourceMapText,
-          babelCompileResult.map,
-          filename,
-          src,
-          babelCompileResult.code,
-        );
-
-    return {...babelCompileResult,
-            map: composedMap};
-  } else {
-    return upstream.transform({ src, filename, options });
-  }
-}
+      map: tsCompileResult.sourceMapText,
+    };
+};
 
 export let getCacheKey: CacheKeyFn = () => {
   const cacheKeyParts = [
@@ -209,4 +189,4 @@ export let getCacheKey: CacheKeyFn = () => {
   const key = crypto.createHash('md5');
   cacheKeyParts.forEach((part) => key.update(part));
   return key.digest('hex');
-}
+};
