@@ -41,6 +41,6 @@
     "rimraf": "^2.6.2",
     "tslint": "^5.7.0",
     "tslint-microsoft-contrib": "^5.0.1",
-    "typescript": "^2.6.0-rc"
+    "typescript": "^2.6.1"
   }
 }
