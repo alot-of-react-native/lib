@@ -6,7 +6,8 @@
     "jest-preset.json",
     "assetFileTransformer",
     "preprocessor",
-    "setup"
+    "setup",
+    "dist"
   ],
   "scripts": {
     "prepublish": "npm run clean && npm run build",
