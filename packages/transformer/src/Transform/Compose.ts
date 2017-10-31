@@ -116,12 +116,12 @@ function composeMaps(
   }
 }
 
-export function composeTransform(
+export function composeTransform<FirstExtra, SecondExtra>(
   first: TransformFn,
   second: TransformFn,
-  firstFilter: ((params: Params<{}>) => boolean) = ConstTrue,
-  secondFilter: ((params: Params<{}>) => boolean) = ConstTrue,
-): TransformFn {
+  firstFilter: ((params: Params<FirstExtra>) => boolean) = ConstTrue,
+  secondFilter: ((params: Params<SecondExtra>) => boolean) = ConstTrue,
+): TransformFn<FirstExtra & SecondExtra>  {
   return ({ options, filename, src }) => {
     const maps: RawSourceMap[] = [];
     let map: any;
@@ -162,7 +162,7 @@ const THIS_FILE = fs.readFileSync(__filename);
 export function composeCacheKey(
   firstGetCacheKey: CacheKeyFn,
   secondGetCacheKey: CacheKeyFn,
-  extraParams: string[] = [],
+  extraParams: Array<string | Buffer> = [],
 ): CacheKeyFn {
   return (fileData, filename, configString) => {
     const cacheKeyParts = [

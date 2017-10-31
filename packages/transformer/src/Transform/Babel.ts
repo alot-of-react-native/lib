@@ -25,13 +25,10 @@ import makeHMRConfig = require('babel-preset-react-native/configs/hmr');
 import resolvePlugins = require('babel-preset-react-native/lib/resolvePlugins');
 import crypto = require('crypto');
 import fs = require('fs');
-import json5 = require('json5');
 import path = require('path');
 
 import { Options, Params, Transformer, TransformResult } from './Types';
 
-// @ts-ignore
-// import {compactMapping} from 'metro-bundler/src/Bundler/source-map/source-map';
 
 const cacheKeyParts = [
   fs.readFileSync(__filename),
@@ -81,9 +78,10 @@ const getBabelRC = (() => {
     // If a .babelrc file doesn't exist in the project,
     // use the Babel config provided with react-native.
     if (!projectBabelRCPath || !fs.existsSync(projectBabelRCPath)) {
-      babelRC = json5.parse(
-        fs.readFileSync(require.resolve('metro-bundler/rn-babelrc.json')),
-      );
+      babelRC = {
+        "presets": [ "react-native" ],
+        "plugins": []
+      }
 
       if (babelRC == null || babelRC.presets == null) {
         throw new Error('Error: unable to load rn-babelrc.json');
@@ -154,10 +152,9 @@ export function transform({filename, options, src}: Params<ExtraOptions>): Trans
   process.env.BABEL_ENV = options.dev ? 'development' : 'production';
 
   try {
-    const builtConfig = options.babelConfig || buildBabelConfig(filename, options);
-
     const babelConfig: TransformOptions = {
-      ...builtConfig,
+      ...buildBabelConfig(filename, options),
+      ...options.babelConfig,
       sourceMaps: true,
     };
     const { ast, code, map } = babel.transform(src, babelConfig);

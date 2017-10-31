@@ -45,7 +45,7 @@ export interface Options {
   projectRoot: string;
 }
 
-export interface Params<ExtraOptions> {
+export interface Params<ExtraOptions = {}> {
   filename: string;
   localPath?: string;
   options: ExtraOptions & Options;

@@ -8,6 +8,7 @@ import { composeCacheKey, composeTransform, ConstTrue } from './Transform/Compos
 import * as Babel from './Transform/Babel';
 import * as TypeScript from './Transform/TypeScript';
 
+export * from './Transform/Types';
 export { Babel };
 export { TypeScript };
 export { composeCacheKey, composeTransform, ConstTrue };
