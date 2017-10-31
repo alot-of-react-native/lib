@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@types/node": "^8.0.43",
+    "@types/source-map": "^0.5.2",
     "jest": "^21.2.1",
     "rimraf": "^2.6.2",
     "tslint": "^5.7.0",

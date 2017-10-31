@@ -26,6 +26,7 @@ export interface TransformResult {
   ast?: Node;
   code: string;
   map: MappingsMap;
+  usedInputSourceMap?: boolean;
   // used in metro-bundler/src/transformer.js
   // but not in typings (metro-bundler/src/JSTransformer/worker/index.js)
   filename?: string;
@@ -36,6 +37,7 @@ export interface TransformResult {
 export interface Options {
   enableBabelRCLookup?: boolean;
   dev?: boolean;
+  inputSourceMap?: any;
   generateSourceMaps?: boolean;
   hot?: boolean;
   inlineRequires?: {blacklist: { [key: string]: true }} | boolean;

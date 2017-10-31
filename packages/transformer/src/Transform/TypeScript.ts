@@ -96,8 +96,8 @@ function composeSourceMaps(tsMap, babelMap, tsFileName, tsContent, babelCode) {
       }
     },
   );
-  // @ts-ignore
-  return map.toJSON();
+  // toJSON exists.
+  return (map as any).toJSON();
 }
 
 const tsConfig = (() => {
@@ -139,51 +139,51 @@ const tsConfig = (() => {
 
 const compilerOptions = {
   ...tsConfig.compilerOptions,
-  inlineSources: true,
   sourceMap: true,
 };
 
 export let transform: TransformFn = ({src, filename, options}) => {
-    const tsCompileResult = ts.transpileModule(src, {
-      compilerOptions,
-      fileName: filename,
-      reportDiagnostics: true,
-    });
+  const tsCompileResult = ts.transpileModule(src, {
+    compilerOptions,
+    fileName: filename,
+    reportDiagnostics: true,
+  });
 
-    const errors = tsCompileResult.diagnostics.filter(
-      ({ category }) => category === ts.DiagnosticCategory.Error,
-    );
+  const errors = tsCompileResult.diagnostics.filter(
+    ({ category }) => category === ts.DiagnosticCategory.Error,
+  );
 
-    if (errors.length) {
-      // report first error
-      const error = errors[0];
-      const message = ts.flattenDiagnosticMessageText(error.messageText, '\n');
-      if (error.file) {
-        const { line, character } = error.file.getLineAndCharacterOfPosition(
-          error.start,
-        );
-        if (error.file.fileName === 'module.ts') {
-          console.error({ error, filename, options });
-        }
-        throw new Error(
-          `${error.file.fileName} (${line + 1},${character + 1}): ${message}`,
-        );
-      } else {
-        throw new Error(message);
+  if (errors.length) {
+    // report first error
+    const error = errors[0];
+    const message = ts.flattenDiagnosticMessageText(error.messageText, '\n');
+    if (error.file) {
+      const { line, character } = error.file.getLineAndCharacterOfPosition(
+        error.start,
+      );
+      if (error.file.fileName === 'module.ts') {
+        console.error({ error, filename, options });
       }
+      throw new Error(
+        `${error.file.fileName} (${line + 1},${character + 1}): ${message}`,
+      );
+    } else {
+      throw new Error(message);
     }
+  }
 
-    return {
-      code: tsCompileResult.outputText,
-      filename,
-      map: tsCompileResult.sourceMapText,
-    };
+  return {
+    code: tsCompileResult.outputText,
+    filename,
+    map: JSON.parse(tsCompileResult.sourceMapText),
+  };
 };
+
+const THIS_FILE = fs.readFileSync(__filename);
 
 export let getCacheKey: CacheKeyFn = () => {
   const cacheKeyParts = [
-    fs.readFileSync(__filename),
-    upstream.getCacheKey(),
+    THIS_FILE,
   ];
 
   const key = crypto.createHash('md5');

@@ -19,7 +19,6 @@
  */
 import { TransformOptions } from 'babel-core';
 import babel = require('babel-core');
-import generate from 'babel-generator';
 import externalHelpersPlugin = require('babel-plugin-external-helpers');
 import inlineRequiresPlugin = require('babel-preset-fbjs/plugins/inline-requires');
 import makeHMRConfig = require('babel-preset-react-native/configs/hmr');
@@ -32,7 +31,7 @@ import path = require('path');
 import { Options, Params, Transformer, TransformResult } from './Types';
 
 // @ts-ignore
-import {compactMapping} from 'metro-bundler/src/Bundler/source-map';
+// import {compactMapping} from 'metro-bundler/src/Bundler/source-map/source-map';
 
 const cacheKeyParts = [
   fs.readFileSync(__filename),
@@ -117,7 +116,7 @@ function buildBabelConfig(filename: string, options: Options): TransformOptions 
       typeof options.enableBabelRCLookup === 'boolean'
         ? options.enableBabelRCLookup
         : true,
-    code: false,
+    code: true,
     filename,
   };
 
@@ -155,43 +154,16 @@ export function transform({filename, options, src}: Params<ExtraOptions>): Trans
   process.env.BABEL_ENV = options.dev ? 'development' : 'production';
 
   try {
+    const builtConfig = options.babelConfig || buildBabelConfig(filename, options);
+
     const babelConfig: TransformOptions = {
-      ...buildBabelConfig(filename, options),
-      ...options.babelConfig,
+      ...builtConfig,
+      sourceMaps: true,
     };
-    // @ts-ignore
-    const {ast, ignored} = babel.transform(src, babelConfig);
+    const { ast, code, map } = babel.transform(src, babelConfig);
 
-    if (ignored) {
-      return {
-        ast: null,
-        code: src,
-        filename,
-        map: null,
-      };
-    } else {
-      const result = generate(
-        ast,
-        {
-          comments: false,
-          compact: false,
-          filename,
-          retainLines: !!options.retainLines,
-          sourceFileName: filename,
-          sourceMaps: true,
-        },
-        src,
-      );
-
-      return {
-        ast,
-        code: result.code,
-        filename,
-        map: options.generateSourceMaps
-          ? result.map
-          : result.rawMappings.map(compactMapping),
-      };
-    }
+    // @ts-ignore code must be set.
+    return { ast, code, map, filename };
   } finally {
     process.env.BABEL_ENV = OLD_BABEL_ENV;
   }
