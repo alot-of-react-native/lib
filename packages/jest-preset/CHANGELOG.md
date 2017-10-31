@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.5"></a>
+## [1.2.5](http://gitlab.frielforreal.com:58432/58432/alot/of-react-native/compare/v1.2.4...v1.2.5) (2017-10-31)
+
+
+
+
+**Note:** Version bump only for package @alot/jest-preset
+
 <a name="1.2.4"></a>
 ## [1.2.4](https://github.com/alot-of-react-native/jest-preset/compare/v1.2.3...v1.2.4) (2017-10-31)
 
