@@ -13,7 +13,10 @@
     "build": "tsc",
     "clean": "rimraf lib"
   },
-  "repository": "https://github.com/alot-of-react-native/jest-preset",
+  "repository": {
+    "type": "git",
+    "repository": "https://github.com/alot-of-react-native/lib"
+  },
   "author": "Aaron Friel",
   "license": "BSD-3-Clause",
   "publishConfig": {
