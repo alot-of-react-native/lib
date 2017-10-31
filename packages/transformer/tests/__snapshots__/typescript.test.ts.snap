@@ -14,9 +14,6 @@ Object {
     "length",
     "pad",
   ],
-  "sources": Array [
-    "P:\\\\c\\\\gh\\\\@alot\\\\of-react-native\\\\packages\\\\transformer\\\\tests\\\\__fixtures__\\\\es5\\\\leftPad.ts",
-  ],
   "sourcesContent": Array [
     "const cache: string[] = [
   '',
@@ -82,9 +79,6 @@ Object {
     "length",
     "pad",
   ],
-  "sources": Array [
-    "P:\\\\c\\\\gh\\\\@alot\\\\of-react-native\\\\packages\\\\transformer\\\\tests\\\\__fixtures__\\\\es2015\\\\leftPad.ts",
-  ],
   "sourcesContent": Array [
     "const cache: string[] = [
   '',
@@ -149,9 +143,6 @@ Object {
     "ch",
     "length",
     "pad",
-  ],
-  "sources": Array [
-    "P:\\\\c\\\\gh\\\\@alot\\\\of-react-native\\\\packages\\\\transformer\\\\tests\\\\__fixtures__\\\\es2016\\\\leftPad.ts",
   ],
   "sourcesContent": Array [
     "const cache: string[] = [

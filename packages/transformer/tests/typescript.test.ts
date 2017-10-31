@@ -36,6 +36,7 @@ describe('@alot/transformer', () => {
             it(`transpiles ${fixture_dir}/${fixture}`, () => {
               const result = transformer.transform({src, filename, options: {}});
               expect(result.code).toMatchSnapshot();
+              delete result.map.sources;
               expect(result.map).toMatchSnapshot();
             });
           }
