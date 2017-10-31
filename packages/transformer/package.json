@@ -1,6 +1,6 @@
 {
   "name": "@alot/transformer",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A TypeScript and Babel transformer for React Native.",
   "repository": {
     "type": "git",
