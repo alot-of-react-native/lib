@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.2"></a>
+## [1.3.2](https://github.com/alot-of-react-native/lib/compare/v1.3.1...v1.3.2) (2017-10-31)
+
+
+### Bug Fixes
+
+* **jest-preset:** Include dist folder in package files. ([bbbc68b](https://github.com/alot-of-react-native/lib/commit/bbbc68b))
+
+
+
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://github.com/alot-of-react-native/lib/compare/v1.3.0...v1.3.1) (2017-10-31)
 
