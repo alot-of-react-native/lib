@@ -10,8 +10,6 @@ import {
   TypeScript,
 } from '@alot/transformer';
 
-import { TransformOptions } from 'babel-core';
-
 import * as babelIstanbulPlugin from 'babel-plugin-istanbul';
 
 function typeScriptFilter({filename}: Params): boolean {
@@ -27,7 +25,7 @@ export function process(
   config: any,
   transformOptions: any,
 ): string {
-  const babelRC: TransformOptions = {
+  const babelRC: any = {
     plugins: [],
     presets: ['jest'],
   };
