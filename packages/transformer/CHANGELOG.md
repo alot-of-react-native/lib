@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/alot-of-react-native/lib/compare/v1.3.2...v1.3.3) (2017-11-05)
+
+
+### Bug Fixes
+
+* **CI:** Remove babel-core ref, fix yarn execution ([de111a5](https://github.com/alot-of-react-native/lib/commit/de111a5))
+
+
+
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://github.com/alot-of-react-native/lib/compare/v1.3.0...v1.3.1) (2017-10-31)
 
