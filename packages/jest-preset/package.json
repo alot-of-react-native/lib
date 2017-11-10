@@ -1,6 +1,6 @@
 {
   "name": "@alot/jest-preset",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "A TypeScript and Babel Jest preset for React Native.",
   "files": [
     "jest-preset.json",
@@ -21,7 +21,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@alot/transformer": "^1.3.3",
+    "@alot/transformer": "^1.3.4",
     "babel-plugin-istanbul": "^4.1.5",
     "babel-preset-jest": "^21.2.0"
   },
