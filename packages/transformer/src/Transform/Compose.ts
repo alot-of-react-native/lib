@@ -167,15 +167,17 @@ export function composeCacheKey(
   return (fileData, filename, configString) => {
     const cacheKeyParts = [
       THIS_FILE,
-      fileData || '',
-      filename || '',
+      JSON.stringify(fileData) || '',
+      JSON.stringify(filename) || '',
       firstGetCacheKey(fileData, filename, configString),
       secondGetCacheKey(fileData, filename, configString),
       ...extraParams,
     ];
 
     const key = crypto.createHash('md5');
-    cacheKeyParts.forEach((part) => key.update(part));
+    cacheKeyParts.forEach((part) => {
+      key.update(part);
+    });
     return key.digest('hex');
   };
 }
